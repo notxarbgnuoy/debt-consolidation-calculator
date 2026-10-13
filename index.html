@@ -1591,56 +1591,150 @@
       }
 
       function renderDebtInputs() {
-        elements.debtItemsContainer.innerHTML = '';
-        state.debts.forEach((debt, index) => {
+        elements.debtItemsContainer.replaceChildren();
+        state.debts.forEach((debt) => {
           const item = document.createElement('div');
           item.className = 'debt-card-item';
-          item.setAttribute('data-debt-id', debt.id);
+          item.setAttribute('data-debt-id', String(debt.id));
 
-          item.innerHTML = `
-            <div class="debt-item-top">
-              <span class="debt-item-title">
-                <span>💳</span>
-                <input type="text" value="${escapeHtml(debt.name)}" class="debt-field-name" data-id="${debt.id}" style="font-weight:600; width:auto; border:1px solid transparent; padding:2px 6px;">
-              </span>
-              <button type="button" class="btn btn-outline-danger btn-sm btn-remove-debt" data-id="${debt.id}" aria-label="Remove ${escapeHtml(debt.name)}">
-                ✕ Remove
-              </button>
-            </div>
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Balance</label>
-                <div class="input-wrapper">
-                  <span class="input-prefix">$</span>
-                  <input type="text" class="has-prefix debt-field-balance" data-id="${debt.id}" inputmode="decimal" value="${Core.formatCurrency(debt.balance).replace('$', '')}">
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Interest Rate (APR)</label>
-                <div class="input-wrapper">
-                  <input type="text" class="has-suffix debt-field-rate" data-id="${debt.id}" inputmode="decimal" value="${debt.rate}">
-                  <span class="input-suffix">%</span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Monthly Payment</label>
-                <div class="input-wrapper">
-                  <span class="input-prefix">$</span>
-                  <input type="text" class="has-prefix debt-field-payment" data-id="${debt.id}" inputmode="decimal" value="${Core.formatCurrency(debt.payment).replace('$', '')}">
-                </div>
-              </div>
-            </div>
-            <div class="debt-selection-row">
-              <label class="checkbox-label">
-                <input type="checkbox" class="debt-field-refi" data-id="${debt.id}" ${debt.includeInRefi ? 'checked' : ''}>
-                <span class="selection-tag refi-tag">Include in Refi</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" class="debt-field-heloc" data-id="${debt.id}" ${debt.includeInHeloc ? 'checked' : ''}>
-                <span class="selection-tag heloc-tag">Include in HELOC</span>
-              </label>
-            </div>
-          `;
+          // Top
+          const top = document.createElement('div');
+          top.className = 'debt-item-top';
+
+          const titleSpan = document.createElement('span');
+          titleSpan.className = 'debt-item-title';
+          const iconSpan = document.createElement('span');
+          iconSpan.textContent = '💳 ';
+          const nameInput = document.createElement('input');
+          nameInput.type = 'text';
+          nameInput.className = 'debt-field-name';
+          nameInput.value = debt.name || '';
+          nameInput.setAttribute('data-id', String(debt.id));
+          nameInput.style.fontWeight = '600';
+          nameInput.style.width = 'auto';
+          nameInput.style.border = '1px solid transparent';
+          nameInput.style.padding = '2px 6px';
+          titleSpan.appendChild(iconSpan);
+          titleSpan.appendChild(nameInput);
+
+          const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
+          removeBtn.className = 'btn btn-outline-danger btn-sm btn-remove-debt';
+          removeBtn.setAttribute('data-id', String(debt.id));
+          removeBtn.setAttribute('aria-label', `Remove ${debt.name || 'debt'}`);
+          removeBtn.textContent = '✕ Remove';
+
+          top.appendChild(titleSpan);
+          top.appendChild(removeBtn);
+
+          // Grid
+          const grid = document.createElement('div');
+          grid.className = 'form-grid';
+
+          // Balance group
+          const balGroup = document.createElement('div');
+          balGroup.className = 'form-group';
+          const balLabel = document.createElement('label');
+          balLabel.textContent = 'Balance';
+          const balWrap = document.createElement('div');
+          balWrap.className = 'input-wrapper';
+          const balPre = document.createElement('span');
+          balPre.className = 'input-prefix';
+          balPre.textContent = '$';
+          const balInput = document.createElement('input');
+          balInput.type = 'text';
+          balInput.className = 'has-prefix debt-field-balance';
+          balInput.setAttribute('data-id', String(debt.id));
+          balInput.inputMode = 'decimal';
+          balInput.value = Core.formatCurrency(debt.balance).replace('$', '');
+          balWrap.appendChild(balPre);
+          balWrap.appendChild(balInput);
+          balGroup.appendChild(balLabel);
+          balGroup.appendChild(balWrap);
+
+          // Rate group
+          const rateGroup = document.createElement('div');
+          rateGroup.className = 'form-group';
+          const rateLabel = document.createElement('label');
+          rateLabel.textContent = 'Interest Rate (APR)';
+          const rateWrap = document.createElement('div');
+          rateWrap.className = 'input-wrapper';
+          const rateInput = document.createElement('input');
+          rateInput.type = 'text';
+          rateInput.className = 'has-suffix debt-field-rate';
+          rateInput.setAttribute('data-id', String(debt.id));
+          rateInput.inputMode = 'decimal';
+          rateInput.value = String(debt.rate);
+          const rateSuf = document.createElement('span');
+          rateSuf.className = 'input-suffix';
+          rateSuf.textContent = '%';
+          rateWrap.appendChild(rateInput);
+          rateWrap.appendChild(rateSuf);
+          rateGroup.appendChild(rateLabel);
+          rateGroup.appendChild(rateWrap);
+
+          // Payment group
+          const payGroup = document.createElement('div');
+          payGroup.className = 'form-group';
+          const payLabel = document.createElement('label');
+          payLabel.textContent = 'Monthly Payment';
+          const payWrap = document.createElement('div');
+          payWrap.className = 'input-wrapper';
+          const payPre = document.createElement('span');
+          payPre.className = 'input-prefix';
+          payPre.textContent = '$';
+          const payInput = document.createElement('input');
+          payInput.type = 'text';
+          payInput.className = 'has-prefix debt-field-payment';
+          payInput.setAttribute('data-id', String(debt.id));
+          payInput.inputMode = 'decimal';
+          payInput.value = Core.formatCurrency(debt.payment).replace('$', '');
+          payWrap.appendChild(payPre);
+          payWrap.appendChild(payInput);
+          payGroup.appendChild(payLabel);
+          payGroup.appendChild(payWrap);
+
+          grid.appendChild(balGroup);
+          grid.appendChild(rateGroup);
+          grid.appendChild(payGroup);
+
+          // Selection row
+          const selRow = document.createElement('div');
+          selRow.className = 'debt-selection-row';
+
+          const refiLabel = document.createElement('label');
+          refiLabel.className = 'checkbox-label';
+          const refiCheck = document.createElement('input');
+          refiCheck.type = 'checkbox';
+          refiCheck.className = 'debt-field-refi';
+          refiCheck.setAttribute('data-id', String(debt.id));
+          refiCheck.checked = Boolean(debt.includeInRefi);
+          const refiTag = document.createElement('span');
+          refiTag.className = 'selection-tag refi-tag';
+          refiTag.textContent = 'Include in Refi';
+          refiLabel.appendChild(refiCheck);
+          refiLabel.appendChild(refiTag);
+
+          const helocLabel = document.createElement('label');
+          helocLabel.className = 'checkbox-label';
+          const helocCheck = document.createElement('input');
+          helocCheck.type = 'checkbox';
+          helocCheck.className = 'debt-field-heloc';
+          helocCheck.setAttribute('data-id', String(debt.id));
+          helocCheck.checked = Boolean(debt.includeInHeloc);
+          const helocTag = document.createElement('span');
+          helocTag.className = 'selection-tag heloc-tag';
+          helocTag.textContent = 'Include in HELOC';
+          helocLabel.appendChild(helocCheck);
+          helocLabel.appendChild(helocTag);
+
+          selRow.appendChild(refiLabel);
+          selRow.appendChild(helocLabel);
+
+          item.appendChild(top);
+          item.appendChild(grid);
+          item.appendChild(selRow);
+
           elements.debtItemsContainer.appendChild(item);
         });
 
@@ -1777,47 +1871,82 @@
       }
 
       function renderTable(current, refi, heloc) {
-        const rows = [
+        elements.comparisonTableBody.replaceChildren();
+
+        function createCell(primaryText, subText, isStrong) {
+          const td = document.createElement('td');
+          if (isStrong) {
+            const strong = document.createElement('strong');
+            strong.textContent = primaryText;
+            td.appendChild(strong);
+          } else {
+            td.appendChild(document.createTextNode(primaryText));
+          }
+          if (subText) {
+            const span = document.createElement('span');
+            span.className = 'table-note';
+            span.textContent = subText;
+            td.appendChild(span);
+          }
+          return td;
+        }
+
+        const data = [
           {
             name: 'Option 1: Current Portfolio',
             balance: Core.formatCurrency(current.totalBalance),
+            balanceSub: '',
             payment: `${Core.formatCurrency(current.totalPayment)}/mo`,
+            paymentSub: '',
             interest: `${Core.formatCurrency(current.totalMonthlyInterest)}/mo`,
+            interestSub: '',
             rate: Core.formatPercent(current.overallBlendedRate),
             standard: current.consumer.cannotAmortize ? 'Does not amortize' : Core.formatMonths(current.consumer.payoffMonths),
-            accel: 'Base Scenario'
+            standardSub: '',
+            accel: 'Base Scenario',
+            accelSub: ''
           },
           {
             name: 'Option 2: Cash-Out Refinance',
             balance: Core.formatCurrency(refi.newMortgageBalance),
-            payment: `${Core.formatCurrency(refi.totalPayment)}/mo<span class="table-note">${refi.monthlyPaymentSavings >= 0 ? 'Saves ' + Core.formatCurrency(refi.monthlyPaymentSavings) + '/mo' : ''}</span>`,
-            interest: `${Core.formatCurrency(refi.totalMonthlyInterest)}/mo<span class="table-note">${refi.monthlyInterestSavings >= 0 ? 'Saves ' + Core.formatCurrency(refi.monthlyInterestSavings) + '/mo' : ''}</span>`,
+            balanceSub: '',
+            payment: `${Core.formatCurrency(refi.totalPayment)}/mo`,
+            paymentSub: refi.monthlyPaymentSavings >= 0 ? `Saves ${Core.formatCurrency(refi.monthlyPaymentSavings)}/mo` : '',
+            interest: `${Core.formatCurrency(refi.totalMonthlyInterest)}/mo`,
+            interestSub: refi.monthlyInterestSavings >= 0 ? `Saves ${Core.formatCurrency(refi.monthlyInterestSavings)}/mo` : '',
             rate: Core.formatPercent(refi.overallBlendedRate),
             standard: Core.formatMonths(refi.standardPayoff.months),
-            accel: `${Core.formatMonths(refi.acceleratedPayoff.months)}<span class="table-note">Saves ${Core.formatCurrency(refi.interestSavedAccelerated)} interest</span>`
+            standardSub: '',
+            accel: Core.formatMonths(refi.acceleratedPayoff.months),
+            accelSub: `Saves ${Core.formatCurrency(refi.interestSavedAccelerated)} interest`
           },
           {
             name: 'Option 3: HELOC (Untouched 1st)',
             balance: `${Core.formatCurrency(current.mortgage.balance)} + ${Core.formatCurrency(heloc.helocBalance)}`,
-            payment: `${Core.formatCurrency(heloc.totalPayment)}/mo<span class="table-note">${heloc.monthlyPaymentSavings >= 0 ? 'Saves ' + Core.formatCurrency(heloc.monthlyPaymentSavings) + '/mo' : ''}</span>`,
-            interest: `${Core.formatCurrency(heloc.totalMonthlyInterest)}/mo<span class="table-note">${heloc.monthlyInterestSavings >= 0 ? 'Saves ' + Core.formatCurrency(heloc.monthlyInterestSavings) + '/mo' : ''}</span>`,
+            balanceSub: '',
+            payment: `${Core.formatCurrency(heloc.totalPayment)}/mo`,
+            paymentSub: heloc.monthlyPaymentSavings >= 0 ? `Saves ${Core.formatCurrency(heloc.monthlyPaymentSavings)}/mo` : '',
+            interest: `${Core.formatCurrency(heloc.totalMonthlyInterest)}/mo`,
+            interestSub: heloc.monthlyInterestSavings >= 0 ? `Saves ${Core.formatCurrency(heloc.monthlyInterestSavings)}/mo` : '',
             rate: Core.formatPercent(heloc.overallBlendedRate),
             standard: heloc.isInterestOnly ? 'Interest-Only' : Core.formatMonths(heloc.standardPayoff.months),
-            accel: `${Core.formatMonths(heloc.acceleratedPayoff.months)} (HELOC)<span class="table-note">Saves ${Core.formatCurrency(heloc.interestSavedAccelerated)} interest</span>`
+            standardSub: '',
+            accel: `${Core.formatMonths(heloc.acceleratedPayoff.months)} (HELOC)`,
+            accelSub: `Saves ${Core.formatCurrency(heloc.interestSavedAccelerated)} interest`
           }
         ];
 
-        elements.comparisonTableBody.innerHTML = rows.map(r => `
-          <tr>
-            <td><strong>${r.name}</strong></td>
-            <td>${r.balance}</td>
-            <td>${r.payment}</td>
-            <td>${r.interest}</td>
-            <td><strong>${r.rate}</strong></td>
-            <td>${r.standard}</td>
-            <td>${r.accel}</td>
-          </tr>
-        `).join('');
+        data.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.appendChild(createCell(r.name, '', true));
+          tr.appendChild(createCell(r.balance, r.balanceSub, false));
+          tr.appendChild(createCell(r.payment, r.paymentSub, false));
+          tr.appendChild(createCell(r.interest, r.interestSub, false));
+          tr.appendChild(createCell(r.rate, '', true));
+          tr.appendChild(createCell(r.standard, r.standardSub, false));
+          tr.appendChild(createCell(r.accel, r.accelSub, false));
+          elements.comparisonTableBody.appendChild(tr);
+        });
       }
 
       // Event Listeners for Static Inputs
