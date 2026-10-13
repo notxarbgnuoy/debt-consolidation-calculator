@@ -1,0 +1,20 @@
+{
+  "name": "debt-consolidation-calculator",
+  "version": "1.0.0",
+  "description": "Blended rate calculator comparing current consumer debt vs cash-out refinance vs HELOC consolidation scenarios",
+  "main": "src/calculator-core.js",
+  "scripts": {
+    "test": "node --test test/calculator.test.js"
+  },
+  "keywords": [
+    "blended-rate",
+    "debt-consolidation",
+    "mortgage",
+    "heloc",
+    "cash-out-refinance",
+    "amortization",
+    "calculator"
+  ],
+  "author": "notxarbgnuoy",
+  "license": "MIT"
+}

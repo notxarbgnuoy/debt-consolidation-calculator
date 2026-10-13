@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blended Rate &amp; Debt Consolidation Calculator | Refinance vs HELOC</title>
+  <meta name="description" content="Free online blended rate calculator for debt consolidation. Compare your current consumer debts against a cash-out refinance mortgage or a HELOC without touching your low first mortgage rate. Calculate monthly interest expense, blended APR, and accelerated payoff timing.">
+  <meta name="keywords" content="blended rate calculator, debt consolidation calculator, cash out refinance vs heloc, blended mortgage rate, consumer debt consolidation, payoff acceleration, interest expense calculator">
+  <meta name="author" content="notxarbgnuoy">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blended Rate &amp; Debt Consolidation Calculator | Refinance vs HELOC">
+  <meta property="og:description" content="Calculate your weighted blended rate and compare consolidating consumer debt into a cash-out refinance vs HELOC while preserving your first mortgage.">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blended Rate &amp; Debt Consolidation Calculator">
+  <meta name="twitter:description" content="Compare cash-out refinance vs HELOC for consumer debt consolidation. Blended rates, monthly interest expense, and accelerated payoff estimates.">
+
+  <!-- Schema.org Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Blended Rate & Debt Consolidation Calculator",
+    "description": "Interactive financial calculator that computes weighted blended interest rates and compares consumer debt consolidation scenarios via cash-out refinance vs HELOC.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --bg-page: #f4f7fc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      
+      --purple: #6366f1;
+      --purple-dark: #4f46e5;
+      --purple-light: #eef2ff;
+      
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --emerald-light: #ecfdf5;
+
+      --blue: #0ea5e9;
+      --blue-dark: #0284c7;
+      --blue-light: #f0f9ff;
+
+      --amber: #f59e0b;
+      --amber-light: #fffbeb;
+
+      --rose: #f43f5e;
+      --rose-light: #fff1f2;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(15,23,42,0.06);
+      --shadow-lg: 0 12px 30px rgba(15,23,42,0.08);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 1.5rem 1rem 3rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* Header & Hero */
+    header.hero {
+      background: linear-gradient(135deg, #3730a3 0%, #4f46e5 50%, #0284c7 100%);
+      color: #ffffff;
+      padding: 2.2rem 2rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .hero p.lead {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 820px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.6rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-light {
+      background: #ffffff;
+      color: var(--purple-dark);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-light:hover {
+      background: #f8fafc;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: var(--purple-dark);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-outline-danger {
+      background: transparent;
+      color: var(--rose);
+      border-color: #fecdd3;
+    }
+    .btn-outline-danger:hover {
+      background: var(--rose-light);
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    /* Executive Metric Overview Grid */
+    .executive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .exec-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exec-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+    }
+    .exec-card.card-purple::before { background: var(--purple); }
+    .exec-card.card-emerald::before { background: var(--emerald); }
+    .exec-card.card-blue::before { background: var(--blue); }
+    .exec-card.card-amber::before { background: var(--amber); }
+
+    .exec-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .exec-value {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .exec-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    /* Main App Layout */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .app-layout {
+        grid-template-columns: 1.15fr 1.35fr;
+        align-items: start;
+      }
+    }
+
+    /* Panel and Section Styling */
+    .panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2,
+    .card-header h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-header .subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 0.15rem;
+    }
+
+    /* Forms & Inputs */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix,
+    .input-suffix {
+      position: absolute;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+    }
+
+    .input-prefix {
+      left: 0.85rem;
+    }
+
+    .input-suffix {
+      right: 0.85rem;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 0.62rem 0.85rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      background: #ffffff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input.has-prefix {
+      padding-left: 1.85rem;
+    }
+
+    input.has-suffix {
+      padding-right: 1.95rem;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 1.05rem;
+      height: 1.05rem;
+      accent-color: var(--purple);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Debts Input List */
+    .debts-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      background: #f8fafc;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      border: 1px dashed var(--border-color);
+    }
+
+    .toolbar-group {
+      display: flex;
+      gap: 0.45rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .debt-card-item {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 0.9rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .debt-card-item:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .debt-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .debt-item-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .debt-selection-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 0.75rem;
+      padding-top: 0.65rem;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    .selection-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+    }
+    .selection-tag.refi-tag {
+      background: var(--emerald-light);
+      color: var(--emerald-dark);
+    }
+    .selection-tag.heloc-tag {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .debt-portfolio-summary {
+      background: var(--purple-light);
+      border: 1px solid #c7d2fe;
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .port-stat-label {
+      font-size: 0.76rem;
+      color: #4338ca;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .port-stat-val {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #312e81;
+    }
+
+    /* Output Scenarios */
+    .scenario-cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .scenario-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .scenario-card.card-current {
+      border-color: #cbd5e1;
+    }
+
+    .scenario-card.card-refi {
+      border-color: var(--emerald);
+      background: linear-gradient(to bottom, #ffffff 0%, #f0fdf4 100%);
+    }
+
+    .scenario-card.card-heloc {
+      border-color: var(--blue);
+      background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 100%);
+    }
+
+    .scenario-badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+    }
+
+    .scenario-card.card-current .scenario-badge-top {
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .scenario-card.card-refi .scenario-badge-top {
+      background: var(--emerald-light);
+      color: var(--emerald-dark);
+    }
+    .scenario-card.card-heloc .scenario-badge-top {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .scenario-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .scenario-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .scenario-balance-chip {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .scenario-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .metric-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.85rem;
+    }
+
+    .metric-box.highlight {
+      background: #faf5ff;
+      border-color: #d8b4fe;
+    }
+
+    .metric-lbl {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .metric-val {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 0.15rem;
+    }
+
+    .metric-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .metric-sub.good {
+      color: var(--emerald-dark);
+      font-weight: 600;
+    }
+
+    /* Payoff Acceleration Highlight Box */
+    .acceleration-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1rem;
+      margin-top: 0.85rem;
+    }
+
+    .scenario-card.card-refi .acceleration-box {
+      border-left: 4px solid var(--emerald);
+      background: #ffffff;
+    }
+
+    .scenario-card.card-heloc .acceleration-box {
+      border-left: 4px solid var(--blue);
+      background: #ffffff;
+    }
+
+    .accel-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .accel-details {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.84rem;
+    }
+
+    .accel-badge {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      background: var(--emerald-light);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* Comparison Table Card */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      text-align: left;
+    }
+
+    table.compare-table th {
+      background: #f8fafc;
+      padding: 0.8rem 0.9rem;
+      font-weight: 700;
+      color: #334155;
+      border-bottom: 2px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    table.compare-table td {
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: top;
+    }
+
+    table.compare-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .table-note {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Informational Notes & FAQs */
+    .info-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .info-section h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .info-section p {
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--purple);
+    }
+
+    .info-box h4 {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .info-box p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      max-width: 640px;
+      width: 100%;
+      padding: 1.8rem;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.25rem;
+      color: var(--text-main);
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 0.2rem 0.5rem;
+    }
+
+    .modal-body {
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    textarea.summary-text {
+      width: 100%;
+      height: 240px;
+      font-family: monospace;
+      font-size: 0.82rem;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: #f8fafc;
+      margin-top: 0.75rem;
+      resize: vertical;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+
+      header.hero {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #000000;
+        box-shadow: none;
+        padding: 1rem;
+      }
+
+      .hero-actions,
+      .debts-toolbar,
+      .btn,
+      .modal-overlay {
+        display: none !important;
+      }
+
+      .app-layout {
+        display: block;
+      }
+
+      .card,
+      .scenario-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #94a3b8;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Blended Rate &amp; Debt Consolidation Calculator</h1>
+        <p class="lead">
+          Compare your current consumer debt portfolio against a <strong>Cash-Out Refinance</strong> on your first mortgage vs. a <strong>HELOC</strong> that consolidates debt without touching your low first mortgage rate.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">⚖️ Balance-Weighted APR</span>
+          <span class="badge">📊 Side-by-Side 3 Options</span>
+          <span class="badge">⚡ Payoff Acceleration</span>
+          <span class="badge">🔒 100% Client-Side Privacy</span>
+        </div>
+
+        <div class="hero-actions">
+          <button type="button" class="btn btn-light" id="btnEmailSummary">
+            ✉️ Email Summary
+          </button>
+          <button type="button" class="btn btn-glass" id="btnShareLink">
+            🔗 Copy Share Link
+          </button>
+          <button type="button" class="btn btn-glass" id="btnPrint">
+            🖨️ Print / Save PDF
+          </button>
+          <button type="button" class="btn btn-glass" id="btnResetDefaults">
+            🔄 Reset Defaults
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Top Executive Metrics Overview -->
+    <section class="executive-grid" aria-label="Executive Metrics Overview" id="executiveGrid">
+      <div class="exec-card card-purple">
+        <div>
+          <div class="exec-title">Current Blended Rate</div>
+          <div class="exec-value" id="topCurrentRate">0.00%</div>
+        </div>
+        <div class="exec-sub" id="topCurrentSub">Mortgage + Consumer Debt</div>
+      </div>
+
+      <div class="exec-card card-emerald">
+        <div>
+          <div class="exec-title">Cash-Out Refinance</div>
+          <div class="exec-value" id="topRefiRate">0.00%</div>
+        </div>
+        <div class="exec-sub" id="topRefiSub">New mortgage rate</div>
+      </div>
+
+      <div class="exec-card card-blue">
+        <div>
+          <div class="exec-title">HELOC Blended Rate</div>
+          <div class="exec-value" id="topHelocRate">0.00%</div>
+        </div>
+        <div class="exec-sub" id="topHelocSub">1st Mortgage + HELOC combined</div>
+      </div>
+
+      <div class="exec-card card-amber">
+        <div>
+          <div class="exec-title">Monthly Payment Savings</div>
+          <div class="exec-value" id="topSavings">$0 / mo</div>
+        </div>
+        <div class="exec-sub" id="topSavingsSub">Immediate cash flow improvement</div>
+      </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <main class="app-layout">
+      
+      <!-- Left Column: Inputs -->
+      <div class="panel inputs-panel">
+        
+        <!-- First Mortgage Card -->
+        <section class="card" aria-labelledby="headingMortgage">
+          <div class="card-header">
+            <div>
+              <h2 id="headingMortgage">🏡 Existing 1st Mortgage</h2>
+              <div class="subtitle">Your primary mortgage that can either be refinanced or left untouched</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="mortgageBalance">Current Balance</label>
+              <div class="input-wrapper">
+                <span class="input-prefix">$</span>
+                <input type="text" id="mortgageBalance" class="has-prefix" inputmode="decimal" placeholder="285,000">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="mortgageRate">Interest Rate (APR)</label>
+              <div class="input-wrapper">
+                <input type="text" id="mortgageRate" class="has-suffix" inputmode="decimal" placeholder="4.25">
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="mortgagePayment">Current Monthly Payment (P&amp;I)</label>
+              <div class="input-wrapper">
+                <span class="input-prefix">$</span>
+                <input type="text" id="mortgagePayment" class="has-prefix" inputmode="decimal" placeholder="1,402">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Consumer Debts Input Card -->
+        <section class="card" aria-labelledby="headingDebts">
+          <div class="card-header">
+            <div>
+              <h2 id="headingDebts">💳 Consumer Debts to Consolidate</h2>
+              <div class="subtitle">Credit cards, auto loans, personal loans, and other debts</div>
+            </div>
+          </div>
+
+          <div class="debts-toolbar">
+            <div class="toolbar-group">
+              <button type="button" class="btn btn-primary btn-sm" id="btnAddDebt">
+                + Add Debt
+              </button>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnSelectAllRefi">
+                ✓ Check All Refi
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnSelectAllHeloc">
+                ✓ Check All HELOC
+              </button>
+            </div>
+          </div>
+
+          <!-- Debt Items List Container -->
+          <div id="debtItemsContainer">
+            <!-- Dynamically populated debt cards -->
+          </div>
+
+          <!-- Portfolio quick summary -->
+          <div class="debt-portfolio-summary" id="portfolioSummary">
+            <div>
+              <div class="port-stat-label">Total Debt Balance</div>
+              <div class="port-stat-val" id="portTotalBalance">$0</div>
+            </div>
+            <div>
+              <div class="port-stat-label">Monthly Payments</div>
+              <div class="port-stat-val" id="portTotalPayment">$0/mo</div>
+            </div>
+            <div>
+              <div class="port-stat-label">Monthly Interest</div>
+              <div class="port-stat-val" id="portTotalInterest">$0/mo</div>
+            </div>
+            <div>
+              <div class="port-stat-label">Consumer Blended APR</div>
+              <div class="port-stat-val" id="portBlendedRate">0.00%</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cash-Out Refinance Assumptions Card -->
+        <section class="card" aria-labelledby="headingRefiAssumptions">
+          <div class="card-header">
+            <div>
+              <h3 id="headingRefiAssumptions">🏛️ Scenario 2: Cash-Out Refinance Assumptions</h3>
+              <div class="subtitle">Consolidates 1st mortgage + selected debts into a new primary mortgage</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="refiRate">New Mortgage Rate (APR)</label>
+              <div class="input-wrapper">
+                <input type="text" id="refiRate" class="has-suffix" inputmode="decimal" placeholder="6.50">
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="refiTermYears">Loan Term</label>
+              <select id="refiTermYears">
+                <option value="30">30 Years</option>
+                <option value="20">20 Years</option>
+                <option value="15">15 Years</option>
+                <option value="10">10 Years</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="refiClosingCosts">Estimated Closing Costs</label>
+              <div class="input-wrapper">
+                <span class="input-prefix">$</span>
+                <input type="text" id="refiClosingCosts" class="has-prefix" inputmode="decimal" placeholder="3,000">
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="checkbox-label" for="refiIncludeCosts">
+                <input type="checkbox" id="refiIncludeCosts" checked>
+                <span>Roll closing costs into new mortgage balance</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- HELOC Assumptions Card -->
+        <section class="card" aria-labelledby="headingHelocAssumptions">
+          <div class="card-header">
+            <div>
+              <h3 id="headingHelocAssumptions">🏦 Scenario 3: HELOC Assumptions</h3>
+              <div class="subtitle">Consolidates selected debts as a 2nd lien while keeping your 1st mortgage intact</div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="helocRate">HELOC Rate (APR)</label>
+              <div class="input-wrapper">
+                <input type="text" id="helocRate" class="has-suffix" inputmode="decimal" placeholder="8.75">
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="helocTermYears">Repayment Term</label>
+              <select id="helocTermYears">
+                <option value="15">15 Years</option>
+                <option value="20">20 Years</option>
+                <option value="10">10 Years</option>
+                <option value="30">30 Years</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="helocPaymentMode">Payment Type</label>
+              <select id="helocPaymentMode">
+                <option value="amortizing">Principal + Interest (Amortizing)</option>
+                <option value="interestOnly">Interest-Only</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="helocFees">Estimated Closing Fees</label>
+              <div class="input-wrapper">
+                <span class="input-prefix">$</span>
+                <input type="text" id="helocFees" class="has-prefix" inputmode="decimal" placeholder="450">
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="checkbox-label" for="helocIncludeFees">
+                <input type="checkbox" id="helocIncludeFees" checked>
+                <span>Roll fees into HELOC balance</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right Column: Outputs -->
+      <div class="panel results-panel">
+        
+        <!-- 3 Scenarios Output Cards -->
+        <div class="scenario-cards-container">
+
+          <!-- OPTION 1: Current Scenario -->
+          <article class="scenario-card card-current" id="optionCurrentCard">
+            <div class="scenario-badge-top">Option 1: Current Financial Position</div>
+            <div class="scenario-header-row">
+              <h3 class="scenario-title">Keep All Existing Debts</h3>
+              <div class="scenario-balance-chip" id="currentTotalBalanceDisplay">$0</div>
+            </div>
+
+            <div class="scenario-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-lbl">Total Monthly Payment</div>
+                <div class="metric-val" id="currentTotalPayment">$0 / mo</div>
+                <div class="metric-sub" id="currentPaymentBreakdown">Mortgage + Debts</div>
+              </div>
+
+              <div class="metric-box">
+                <div class="metric-lbl">Monthly Interest Expense</div>
+                <div class="metric-val" id="currentMonthlyInterest">$0 / mo</div>
+                <div class="metric-sub" id="currentInterestSub">Monthly finance charges</div>
+              </div>
+
+              <div class="metric-box highlight">
+                <div class="metric-lbl">Overall Blended APR</div>
+                <div class="metric-val" id="currentBlendedRate">0.00%</div>
+                <div class="metric-sub">Weighted across all debts</div>
+              </div>
+
+              <div class="metric-box">
+                <div class="metric-lbl">Consumer Debt Payoff</div>
+                <div class="metric-val" id="currentConsumerPayoff">—</div>
+                <div class="metric-sub" id="currentConsumerPayoffSub">Under current payments</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- OPTION 2: Cash-Out Refinance -->
+          <article class="scenario-card card-refi" id="optionRefiCard">
+            <div class="scenario-badge-top">Option 2: Cash-Out Refinance</div>
+            <div class="scenario-header-row">
+              <div>
+                <h3 class="scenario-title">Refinance 1st Mortgage</h3>
+                <div class="table-note" id="refiConsolidatedCount">Consolidating selected consumer debts</div>
+              </div>
+              <div class="scenario-balance-chip" id="refiNewBalanceDisplay">$0</div>
+            </div>
+
+            <div class="scenario-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-lbl">Total Monthly Payment</div>
+                <div class="metric-val" id="refiTotalPayment">$0 / mo</div>
+                <div class="metric-sub good" id="refiPaymentSavings">Saves $0 / mo</div>
+              </div>
+
+              <div class="metric-box">
+                <div class="metric-lbl">Monthly Interest Expense</div>
+                <div class="metric-val" id="refiMonthlyInterest">$0 / mo</div>
+                <div class="metric-sub good" id="refiInterestSavings">Saves $0 / mo interest</div>
+              </div>
+
+              <div class="metric-box highlight">
+                <div class="metric-lbl">New Blended APR</div>
+                <div class="metric-val" id="refiBlendedRate">0.00%</div>
+                <div class="metric-sub" id="refiBlendedSub">New mortgage + unconsolidated</div>
+              </div>
+
+              <div class="metric-box">
+                <div class="metric-lbl">Standard Payoff</div>
+                <div class="metric-val" id="refiStandardPayoff">30 yrs</div>
+                <div class="metric-sub">Scheduled 30-year term</div>
+              </div>
+            </div>
+
+            <!-- Payoff Acceleration Box -->
+            <div class="acceleration-box">
+              <div class="accel-title">
+                ⚡ <strong>Accelerated Payoff</strong>: Keep Paying Your Prior Total Budget
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                If you keep making the same total payment as before (<span id="refiKeepPayAmount">$0/mo</span>), applying the difference directly to principal:
+              </p>
+              <div class="accel-details">
+                <div>
+                  New Payoff Time: <strong id="refiAccelPayoffTime" class="accel-badge">—</strong>
+                </div>
+                <div>
+                  Lifetime Interest Saved: <strong id="refiAccelInterestSaved" class="accel-badge">$0</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- OPTION 3: HELOC -->
+          <article class="scenario-card card-heloc" id="optionHelocCard">
+            <div class="scenario-badge-top">Option 3: HELOC (1st Mortgage Untouched)</div>
+            <div class="scenario-header-row">
+              <div>
+                <h3 class="scenario-title">HELOC 2nd Lien</h3>
+                <div class="table-note" id="helocSummarySub">1st mortgage preserved at original rate</div>
+              </div>
+              <div class="scenario-balance-chip" id="helocBalanceDisplay">$0</div>
+            </div>
+
+            <div class="scenario-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-lbl">Total Monthly Payment</div>
+                <div class="metric-val" id="helocTotalPayment">$0 / mo</div>
+                <div class="metric-sub good" id="helocPaymentSavings">Saves $0 / mo</div>
+              </div>
+
+              <div class="metric-box">
+                <div class="metric-lbl">Monthly Interest Expense</div>
+                <div class="metric-val" id="helocMonthlyInterest">$0 / mo</div>
+                <div class="metric-sub good" id="helocInterestSavings">Saves $0 / mo interest</div>
+              </div>
+
+              <div class="metric-box highlight">
+                <div class="metric-lbl">Combined Blended APR</div>
+                <div class="metric-val" id="helocBlendedRate">0.00%</div>
+                <div class="metric-sub">1st Mortgage + HELOC combined</div>
+              </div>
+
+              <div class="metric-box">
+                <div class="metric-lbl">HELOC Standard Payoff</div>
+                <div class="metric-val" id="helocStandardPayoff">15 yrs</div>
+                <div class="metric-sub" id="helocStandardSub">Scheduled repayment</div>
+              </div>
+            </div>
+
+            <!-- Payoff Acceleration Box -->
+            <div class="acceleration-box">
+              <div class="accel-title">
+                ⚡ <strong>Accelerated Payoff</strong>: Keep Paying Your Consumer Debt Budget
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.45rem;">
+                If you keep paying your former consumer debt payment (<span id="helocKeepPayAmount">$0/mo</span>) towards the HELOC:
+              </p>
+              <div class="accel-details">
+                <div>
+                  HELOC Paid Off In: <strong id="helocAccelPayoffTime" class="accel-badge">—</strong>
+                </div>
+                <div>
+                  HELOC Interest Saved: <strong id="helocAccelInterestSaved" class="accel-badge">$0</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Detailed Side-by-Side Comparison Table -->
+        <section class="card" aria-labelledby="headingTable">
+          <div class="card-header">
+            <div>
+              <h3 id="headingTable">📊 Side-by-Side Comparison Matrix</h3>
+              <div class="subtitle">Complete breakdown of balance, payment, interest, rate, and payoff across all 3 options</div>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="compare-table" id="comparisonTable">
+              <thead>
+                <tr>
+                  <th scope="col">Option</th>
+                  <th scope="col">Total Balance</th>
+                  <th scope="col">Monthly Payment</th>
+                  <th scope="col">Monthly Interest</th>
+                  <th scope="col">Blended APR</th>
+                  <th scope="col">Standard Payoff</th>
+                  <th scope="col">Accelerated Payoff</th>
+                </tr>
+              </thead>
+              <tbody id="comparisonTableBody">
+                <!-- Dynamically populated rows -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Information, Educational & SEO Content Section -->
+    <section class="info-section">
+      <h3>Understanding Blended Rates &amp; Consolidation Strategies</h3>
+      <p>
+        When you have multiple debts—such as an existing first mortgage, credit cards, auto loans, and personal loans—calculating your <strong>weighted average blended rate</strong> reveals the true cost of your overall debt portfolio. Comparing a <strong>cash-out refinance</strong> against a <strong>HELOC</strong> allows you to evaluate whether trading a low primary mortgage rate for a single larger loan is financially superior to taking a second lien and leaving your first mortgage untouched.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>How Blended Rate is Calculated</h4>
+          <p>
+            Weighted Blended APR = <code>&Sigma;(Balance &times; APR) &divide; &Sigma;Balance</code>. This balances each interest rate by its proportion of your total debt, giving an accurate effective rate across all obligations.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h4>Cash-Out Refinance vs. HELOC</h4>
+          <p>
+            A cash-out refinance replaces your current mortgage entirely with a new, larger loan at current market rates. A HELOC acts as a second mortgage, allowing you to preserve an existing 3% or 4% primary mortgage while consolidating high-APR cards.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h4>The Power of Payoff Acceleration</h4>
+          <p>
+            Consolidation lowers your required monthly payment, immediately freeing up cash flow. If you maintain discipline and continue paying your previous total monthly budget towards principal, you can eliminate debt years early and save thousands in interest.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Email Summary / Share Modal -->
+  <div class="modal-overlay" id="summaryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Analysis Summary</h3>
+        <button type="button" class="btn-close" id="btnCloseModal" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Review the comprehensive analysis below. You can copy the text or launch your email client to send it directly.</p>
+        <textarea class="summary-text" id="modalSummaryText" readonly></textarea>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary" id="btnLaunchEmail">
+            ✉️ Open in Email App
+          </button>
+          <button type="button" class="btn btn-secondary" id="btnCopyText">
+            📋 Copy Text
+          </button>
+          <button type="button" class="btn btn-secondary" id="btnCopyShareableLink">
+            🔗 Copy Shareable Link
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calculator Core Script -->
+  <script src="src/calculator-core.js"></script>
+
+  <!-- Application UI Controller Script -->
+  <script>
+    (function() {
+      'use strict';
+
+      // Default State
+      const defaultState = {
+        mortgage: {
+          balance: 285000,
+          rate: 4.25,
+          payment: 1402
+        },
+        debts: [
+          { id: 1, name: 'Credit Card 1', balance: 9500, rate: 24.99, payment: 285, includeInRefi: true, includeInHeloc: true, interestOverride: '' },
+          { id: 2, name: 'Credit Card 2', balance: 5200, rate: 21.49, payment: 160, includeInRefi: true, includeInHeloc: true, interestOverride: '' },
+          { id: 3, name: 'Auto Loan', balance: 14000, rate: 7.99, payment: 380, includeInRefi: true, includeInHeloc: true, interestOverride: '' },
+          { id: 4, name: 'Personal Loan', balance: 6500, rate: 12.50, payment: 210, includeInRefi: true, includeInHeloc: true, interestOverride: '' }
+        ],
+        refi: {
+          rate: 6.50,
+          termYears: 30,
+          closingCosts: 3000,
+          includeClosingCosts: true
+        },
+        heloc: {
+          rate: 8.75,
+          termYears: 15,
+          paymentMode: 'amortizing',
+          fees: 450,
+          includeFees: true
+        }
+      };
+
+      let state = JSON.parse(JSON.stringify(defaultState));
+      let nextDebtId = 5;
+
+      // DOM Elements
+      const elements = {
+        mortgageBalance: document.getElementById('mortgageBalance'),
+        mortgageRate: document.getElementById('mortgageRate'),
+        mortgagePayment: document.getElementById('mortgagePayment'),
+
+        debtItemsContainer: document.getElementById('debtItemsContainer'),
+        btnAddDebt: document.getElementById('btnAddDebt'),
+        btnSelectAllRefi: document.getElementById('btnSelectAllRefi'),
+        btnSelectAllHeloc: document.getElementById('btnSelectAllHeloc'),
+
+        portTotalBalance: document.getElementById('portTotalBalance'),
+        portTotalPayment: document.getElementById('portTotalPayment'),
+        portTotalInterest: document.getElementById('portTotalInterest'),
+        portBlendedRate: document.getElementById('portBlendedRate'),
+
+        refiRate: document.getElementById('refiRate'),
+        refiTermYears: document.getElementById('refiTermYears'),
+        refiClosingCosts: document.getElementById('refiClosingCosts'),
+        refiIncludeCosts: document.getElementById('refiIncludeCosts'),
+
+        helocRate: document.getElementById('helocRate'),
+        helocTermYears: document.getElementById('helocTermYears'),
+        helocPaymentMode: document.getElementById('helocPaymentMode'),
+        helocFees: document.getElementById('helocFees'),
+        helocIncludeFees: document.getElementById('helocIncludeFees'),
+
+        // Top Metrics
+        topCurrentRate: document.getElementById('topCurrentRate'),
+        topRefiRate: document.getElementById('topRefiRate'),
+        topHelocRate: document.getElementById('topHelocRate'),
+        topSavings: document.getElementById('topSavings'),
+        topSavingsSub: document.getElementById('topSavingsSub'),
+
+        // Option 1
+        currentTotalBalanceDisplay: document.getElementById('currentTotalBalanceDisplay'),
+        currentTotalPayment: document.getElementById('currentTotalPayment'),
+        currentPaymentBreakdown: document.getElementById('currentPaymentBreakdown'),
+        currentMonthlyInterest: document.getElementById('currentMonthlyInterest'),
+        currentBlendedRate: document.getElementById('currentBlendedRate'),
+        currentConsumerPayoff: document.getElementById('currentConsumerPayoff'),
+
+        // Option 2
+        refiNewBalanceDisplay: document.getElementById('refiNewBalanceDisplay'),
+        refiConsolidatedCount: document.getElementById('refiConsolidatedCount'),
+        refiTotalPayment: document.getElementById('refiTotalPayment'),
+        refiPaymentSavings: document.getElementById('refiPaymentSavings'),
+        refiMonthlyInterest: document.getElementById('refiMonthlyInterest'),
+        refiInterestSavings: document.getElementById('refiInterestSavings'),
+        refiBlendedRate: document.getElementById('refiBlendedRate'),
+        refiStandardPayoff: document.getElementById('refiStandardPayoff'),
+        refiKeepPayAmount: document.getElementById('refiKeepPayAmount'),
+        refiAccelPayoffTime: document.getElementById('refiAccelPayoffTime'),
+        refiAccelInterestSaved: document.getElementById('refiAccelInterestSaved'),
+
+        // Option 3
+        helocBalanceDisplay: document.getElementById('helocBalanceDisplay'),
+        helocSummarySub: document.getElementById('helocSummarySub'),
+        helocTotalPayment: document.getElementById('helocTotalPayment'),
+        helocPaymentSavings: document.getElementById('helocPaymentSavings'),
+        helocMonthlyInterest: document.getElementById('helocMonthlyInterest'),
+        helocInterestSavings: document.getElementById('helocInterestSavings'),
+        helocBlendedRate: document.getElementById('helocBlendedRate'),
+        helocStandardPayoff: document.getElementById('helocStandardPayoff'),
+        helocKeepPayAmount: document.getElementById('helocKeepPayAmount'),
+        helocAccelPayoffTime: document.getElementById('helocAccelPayoffTime'),
+        helocAccelInterestSaved: document.getElementById('helocAccelInterestSaved'),
+
+        // Table
+        comparisonTableBody: document.getElementById('comparisonTableBody'),
+
+        // Modal
+        summaryModal: document.getElementById('summaryModal'),
+        btnCloseModal: document.getElementById('btnCloseModal'),
+        modalSummaryText: document.getElementById('modalSummaryText'),
+        btnEmailSummary: document.getElementById('btnEmailSummary'),
+        btnLaunchEmail: document.getElementById('btnLaunchEmail'),
+        btnCopyText: document.getElementById('btnCopyText'),
+        btnCopyShareableLink: document.getElementById('btnCopyShareableLink'),
+        btnShareLink: document.getElementById('btnShareLink'),
+        btnPrint: document.getElementById('btnPrint'),
+        btnResetDefaults: document.getElementById('btnResetDefaults')
+      };
+
+      // Ensure Core Library is Available
+      const Core = window.DebtCalcCore;
+      if (!Core) {
+        console.error('DebtCalcCore library failed to load.');
+        return;
+      }
+
+      // Check URL for shared scenario state or LocalStorage
+      function initializeState() {
+        try {
+          if (window.location.hash && window.location.hash.length > 2) {
+            const hashData = window.location.hash.substring(1);
+            const restored = Core.deserializeState(hashData);
+            if (restored && restored.debts) {
+              state = restored;
+              return;
+            }
+          }
+          const saved = localStorage.getItem('debt_calc_scenario');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed && parsed.debts) {
+              state = parsed;
+              return;
+            }
+          }
+        } catch (e) {
+          console.warn('Error reading saved state', e);
+        }
+      }
+
+      function saveScenarioToLocal() {
+        try {
+          localStorage.setItem('debt_calc_scenario', JSON.stringify(state));
+        } catch (e) {}
+      }
+
+      function getShareableUrl() {
+        const serialized = Core.serializeState(state);
+        const url = new URL(window.location.href);
+        url.hash = serialized;
+        return url.toString();
+      }
+
+      function renderDebtInputs() {
+        elements.debtItemsContainer.replaceChildren();
+        state.debts.forEach((debt) => {
+          const item = document.createElement('div');
+          item.className = 'debt-card-item';
+          item.setAttribute('data-debt-id', String(debt.id));
+
+          // Top
+          const top = document.createElement('div');
+          top.className = 'debt-item-top';
+
+          const titleSpan = document.createElement('span');
+          titleSpan.className = 'debt-item-title';
+          const iconSpan = document.createElement('span');
+          iconSpan.textContent = '💳 ';
+          const nameInput = document.createElement('input');
+          nameInput.type = 'text';
+          nameInput.className = 'debt-field-name';
+          nameInput.value = debt.name || '';
+          nameInput.setAttribute('data-id', String(debt.id));
+          nameInput.style.fontWeight = '600';
+          nameInput.style.width = 'auto';
+          nameInput.style.border = '1px solid transparent';
+          nameInput.style.padding = '2px 6px';
+          titleSpan.appendChild(iconSpan);
+          titleSpan.appendChild(nameInput);
+
+          const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
+          removeBtn.className = 'btn btn-outline-danger btn-sm btn-remove-debt';
+          removeBtn.setAttribute('data-id', String(debt.id));
+          removeBtn.setAttribute('aria-label', `Remove ${debt.name || 'debt'}`);
+          removeBtn.textContent = '✕ Remove';
+
+          top.appendChild(titleSpan);
+          top.appendChild(removeBtn);
+
+          // Grid
+          const grid = document.createElement('div');
+          grid.className = 'form-grid';
+
+          // Balance group
+          const balGroup = document.createElement('div');
+          balGroup.className = 'form-group';
+          const balLabel = document.createElement('label');
+          balLabel.textContent = 'Balance';
+          const balWrap = document.createElement('div');
+          balWrap.className = 'input-wrapper';
+          const balPre = document.createElement('span');
+          balPre.className = 'input-prefix';
+          balPre.textContent = '$';
+          const balInput = document.createElement('input');
+          balInput.type = 'text';
+          balInput.className = 'has-prefix debt-field-balance';
+          balInput.setAttribute('data-id', String(debt.id));
+          balInput.inputMode = 'decimal';
+          balInput.value = Core.formatCurrency(debt.balance).replace('$', '');
+          balWrap.appendChild(balPre);
+          balWrap.appendChild(balInput);
+          balGroup.appendChild(balLabel);
+          balGroup.appendChild(balWrap);
+
+          // Rate group
+          const rateGroup = document.createElement('div');
+          rateGroup.className = 'form-group';
+          const rateLabel = document.createElement('label');
+          rateLabel.textContent = 'Interest Rate (APR)';
+          const rateWrap = document.createElement('div');
+          rateWrap.className = 'input-wrapper';
+          const rateInput = document.createElement('input');
+          rateInput.type = 'text';
+          rateInput.className = 'has-suffix debt-field-rate';
+          rateInput.setAttribute('data-id', String(debt.id));
+          rateInput.inputMode = 'decimal';
+          rateInput.value = String(debt.rate);
+          const rateSuf = document.createElement('span');
+          rateSuf.className = 'input-suffix';
+          rateSuf.textContent = '%';
+          rateWrap.appendChild(rateInput);
+          rateWrap.appendChild(rateSuf);
+          rateGroup.appendChild(rateLabel);
+          rateGroup.appendChild(rateWrap);
+
+          // Payment group
+          const payGroup = document.createElement('div');
+          payGroup.className = 'form-group';
+          const payLabel = document.createElement('label');
+          payLabel.textContent = 'Monthly Payment';
+          const payWrap = document.createElement('div');
+          payWrap.className = 'input-wrapper';
+          const payPre = document.createElement('span');
+          payPre.className = 'input-prefix';
+          payPre.textContent = '$';
+          const payInput = document.createElement('input');
+          payInput.type = 'text';
+          payInput.className = 'has-prefix debt-field-payment';
+          payInput.setAttribute('data-id', String(debt.id));
+          payInput.inputMode = 'decimal';
+          payInput.value = Core.formatCurrency(debt.payment).replace('$', '');
+          payWrap.appendChild(payPre);
+          payWrap.appendChild(payInput);
+          payGroup.appendChild(payLabel);
+          payGroup.appendChild(payWrap);
+
+          grid.appendChild(balGroup);
+          grid.appendChild(rateGroup);
+          grid.appendChild(payGroup);
+
+          // Selection row
+          const selRow = document.createElement('div');
+          selRow.className = 'debt-selection-row';
+
+          const refiLabel = document.createElement('label');
+          refiLabel.className = 'checkbox-label';
+          const refiCheck = document.createElement('input');
+          refiCheck.type = 'checkbox';
+          refiCheck.className = 'debt-field-refi';
+          refiCheck.setAttribute('data-id', String(debt.id));
+          refiCheck.checked = Boolean(debt.includeInRefi);
+          const refiTag = document.createElement('span');
+          refiTag.className = 'selection-tag refi-tag';
+          refiTag.textContent = 'Include in Refi';
+          refiLabel.appendChild(refiCheck);
+          refiLabel.appendChild(refiTag);
+
+          const helocLabel = document.createElement('label');
+          helocLabel.className = 'checkbox-label';
+          const helocCheck = document.createElement('input');
+          helocCheck.type = 'checkbox';
+          helocCheck.className = 'debt-field-heloc';
+          helocCheck.setAttribute('data-id', String(debt.id));
+          helocCheck.checked = Boolean(debt.includeInHeloc);
+          const helocTag = document.createElement('span');
+          helocTag.className = 'selection-tag heloc-tag';
+          helocTag.textContent = 'Include in HELOC';
+          helocLabel.appendChild(helocCheck);
+          helocLabel.appendChild(helocTag);
+
+          selRow.appendChild(refiLabel);
+          selRow.appendChild(helocLabel);
+
+          item.appendChild(top);
+          item.appendChild(grid);
+          item.appendChild(selRow);
+
+          elements.debtItemsContainer.appendChild(item);
+        });
+
+        // Set max nextDebtId
+        const maxId = state.debts.reduce((max, d) => Math.max(max, d.id || 0), 0);
+        nextDebtId = maxId + 1;
+      }
+
+      function populateStaticInputs() {
+        elements.mortgageBalance.value = Core.formatCurrency(state.mortgage.balance).replace('$', '');
+        elements.mortgageRate.value = state.mortgage.rate;
+        elements.mortgagePayment.value = Core.formatCurrency(state.mortgage.payment).replace('$', '');
+
+        elements.refiRate.value = state.refi.rate;
+        elements.refiTermYears.value = state.refi.termYears;
+        elements.refiClosingCosts.value = Core.formatCurrency(state.refi.closingCosts).replace('$', '');
+        elements.refiIncludeCosts.checked = state.refi.includeClosingCosts;
+
+        elements.helocRate.value = state.heloc.rate;
+        elements.helocTermYears.value = state.heloc.termYears;
+        elements.helocPaymentMode.value = state.heloc.paymentMode;
+        elements.helocFees.value = Core.formatCurrency(state.heloc.fees).replace('$', '');
+        elements.helocIncludeFees.checked = state.heloc.includeFees;
+      }
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, function(m) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+        });
+      }
+
+      // Calculations and UI Rendering
+      let currentResults = null;
+
+      function updateCalculations() {
+        const current = Core.computeCurrentScenario(state.debts, state.mortgage);
+        const refi = Core.computeRefiScenario(current, state.refi);
+        const heloc = Core.computeHelocScenario(current, state.heloc);
+
+        currentResults = { current, refi, heloc };
+
+        // 1. Executive Grid
+        elements.topCurrentRate.textContent = Core.formatPercent(current.overallBlendedRate);
+        elements.topRefiRate.textContent = Core.formatPercent(refi.rate);
+        elements.topHelocRate.textContent = Core.formatPercent(heloc.overallBlendedRate);
+
+        const bestSavings = Math.max(refi.monthlyPaymentSavings, heloc.monthlyPaymentSavings);
+        if (bestSavings > 0) {
+          elements.topSavings.textContent = `${Core.formatCurrency(bestSavings)} / mo`;
+          elements.topSavingsSub.textContent = refi.monthlyPaymentSavings >= heloc.monthlyPaymentSavings
+            ? 'Via Cash-Out Refinance'
+            : 'Via HELOC';
+        } else {
+          elements.topSavings.textContent = '$0 / mo';
+          elements.topSavingsSub.textContent = 'Payments optimized';
+        }
+
+        // 2. Consumer Debts Toolbar Summary
+        elements.portTotalBalance.textContent = Core.formatCurrency(current.consumer.balance);
+        elements.portTotalPayment.textContent = `${Core.formatCurrency(current.consumer.payment)}/mo`;
+        elements.portTotalInterest.textContent = `${Core.formatCurrency(current.consumer.monthlyInterest)}/mo`;
+        elements.portBlendedRate.textContent = Core.formatPercent(current.consumer.blendedRate);
+
+        // 3. Option 1 Card
+        elements.currentTotalBalanceDisplay.textContent = Core.formatCurrency(current.totalBalance);
+        elements.currentTotalPayment.textContent = `${Core.formatCurrency(current.totalPayment)} / mo`;
+        elements.currentPaymentBreakdown.textContent = `Mortgage ${Core.formatCurrency(current.mortgage.payment)} + Debts ${Core.formatCurrency(current.consumer.payment)}`;
+        elements.currentMonthlyInterest.textContent = `${Core.formatCurrency(current.totalMonthlyInterest)} / mo`;
+        elements.currentBlendedRate.textContent = Core.formatPercent(current.overallBlendedRate);
+        elements.currentConsumerPayoff.textContent = current.consumer.cannotAmortize
+          ? 'Does not amortize'
+          : Core.formatMonths(current.consumer.payoffMonths);
+
+        // 4. Option 2 Card (Refi)
+        elements.refiNewBalanceDisplay.textContent = Core.formatCurrency(refi.newMortgageBalance);
+        elements.refiConsolidatedCount.textContent = `Consolidating ${refi.selectedDebtsCount} debts (${Core.formatCurrency(refi.consolidatedDebtBalance)})`;
+        elements.refiTotalPayment.textContent = `${Core.formatCurrency(refi.totalPayment)} / mo`;
+        if (refi.monthlyPaymentSavings >= 0) {
+          elements.refiPaymentSavings.className = 'metric-sub good';
+          elements.refiPaymentSavings.textContent = `Saves ${Core.formatCurrency(refi.monthlyPaymentSavings)} / mo`;
+        } else {
+          elements.refiPaymentSavings.className = 'metric-sub';
+          elements.refiPaymentSavings.textContent = `Costs +${Core.formatCurrency(Math.abs(refi.monthlyPaymentSavings))} / mo`;
+        }
+
+        elements.refiMonthlyInterest.textContent = `${Core.formatCurrency(refi.totalMonthlyInterest)} / mo`;
+        if (refi.monthlyInterestSavings >= 0) {
+          elements.refiInterestSavings.className = 'metric-sub good';
+          elements.refiInterestSavings.textContent = `Saves ${Core.formatCurrency(refi.monthlyInterestSavings)} / mo interest`;
+        } else {
+          elements.refiInterestSavings.className = 'metric-sub';
+          elements.refiInterestSavings.textContent = `Costs +${Core.formatCurrency(Math.abs(refi.monthlyInterestSavings))} / mo interest`;
+        }
+
+        elements.refiBlendedRate.textContent = Core.formatPercent(refi.overallBlendedRate);
+        elements.refiStandardPayoff.textContent = Core.formatMonths(refi.standardPayoff.months);
+        elements.refiKeepPayAmount.textContent = `${Core.formatCurrency(refi.acceleratedPayment)}/mo`;
+        elements.refiAccelPayoffTime.textContent = Core.formatMonths(refi.acceleratedPayoff.months);
+        elements.refiAccelInterestSaved.textContent = Core.formatCurrency(refi.interestSavedAccelerated);
+
+        // 5. Option 3 Card (HELOC)
+        elements.helocBalanceDisplay.textContent = Core.formatCurrency(heloc.helocBalance);
+        elements.helocSummarySub.textContent = `1st Mortgage preserved at ${Core.formatPercent(current.mortgage.rate)}`;
+        elements.helocTotalPayment.textContent = `${Core.formatCurrency(heloc.totalPayment)} / mo`;
+        if (heloc.monthlyPaymentSavings >= 0) {
+          elements.helocPaymentSavings.className = 'metric-sub good';
+          elements.helocPaymentSavings.textContent = `Saves ${Core.formatCurrency(heloc.monthlyPaymentSavings)} / mo`;
+        } else {
+          elements.helocPaymentSavings.className = 'metric-sub';
+          elements.helocPaymentSavings.textContent = `Costs +${Core.formatCurrency(Math.abs(heloc.monthlyPaymentSavings))} / mo`;
+        }
+
+        elements.helocMonthlyInterest.textContent = `${Core.formatCurrency(heloc.totalMonthlyInterest)} / mo`;
+        if (heloc.monthlyInterestSavings >= 0) {
+          elements.helocInterestSavings.className = 'metric-sub good';
+          elements.helocInterestSavings.textContent = `Saves ${Core.formatCurrency(heloc.monthlyInterestSavings)} / mo interest`;
+        } else {
+          elements.helocInterestSavings.className = 'metric-sub';
+          elements.helocInterestSavings.textContent = `Costs +${Core.formatCurrency(Math.abs(heloc.monthlyInterestSavings))} / mo interest`;
+        }
+
+        elements.helocBlendedRate.textContent = Core.formatPercent(heloc.overallBlendedRate);
+        elements.helocStandardPayoff.textContent = heloc.isInterestOnly
+          ? 'Interest-Only'
+          : Core.formatMonths(heloc.standardPayoff.months);
+        elements.helocKeepPayAmount.textContent = `${Core.formatCurrency(heloc.acceleratedPayment)}/mo`;
+        elements.helocAccelPayoffTime.textContent = Core.formatMonths(heloc.acceleratedPayoff.months);
+        elements.helocAccelInterestSaved.textContent = Core.formatCurrency(heloc.interestSavedAccelerated);
+
+        // 6. Side-by-side Table
+        renderTable(current, refi, heloc);
+
+        saveScenarioToLocal();
+      }
+
+      function renderTable(current, refi, heloc) {
+        elements.comparisonTableBody.replaceChildren();
+
+        function createCell(primaryText, subText, isStrong) {
+          const td = document.createElement('td');
+          if (isStrong) {
+            const strong = document.createElement('strong');
+            strong.textContent = primaryText;
+            td.appendChild(strong);
+          } else {
+            td.appendChild(document.createTextNode(primaryText));
+          }
+          if (subText) {
+            const span = document.createElement('span');
+            span.className = 'table-note';
+            span.textContent = subText;
+            td.appendChild(span);
+          }
+          return td;
+        }
+
+        const data = [
+          {
+            name: 'Option 1: Current Portfolio',
+            balance: Core.formatCurrency(current.totalBalance),
+            balanceSub: '',
+            payment: `${Core.formatCurrency(current.totalPayment)}/mo`,
+            paymentSub: '',
+            interest: `${Core.formatCurrency(current.totalMonthlyInterest)}/mo`,
+            interestSub: '',
+            rate: Core.formatPercent(current.overallBlendedRate),
+            standard: current.consumer.cannotAmortize ? 'Does not amortize' : Core.formatMonths(current.consumer.payoffMonths),
+            standardSub: '',
+            accel: 'Base Scenario',
+            accelSub: ''
+          },
+          {
+            name: 'Option 2: Cash-Out Refinance',
+            balance: Core.formatCurrency(refi.newMortgageBalance),
+            balanceSub: '',
+            payment: `${Core.formatCurrency(refi.totalPayment)}/mo`,
+            paymentSub: refi.monthlyPaymentSavings >= 0 ? `Saves ${Core.formatCurrency(refi.monthlyPaymentSavings)}/mo` : '',
+            interest: `${Core.formatCurrency(refi.totalMonthlyInterest)}/mo`,
+            interestSub: refi.monthlyInterestSavings >= 0 ? `Saves ${Core.formatCurrency(refi.monthlyInterestSavings)}/mo` : '',
+            rate: Core.formatPercent(refi.overallBlendedRate),
+            standard: Core.formatMonths(refi.standardPayoff.months),
+            standardSub: '',
+            accel: Core.formatMonths(refi.acceleratedPayoff.months),
+            accelSub: `Saves ${Core.formatCurrency(refi.interestSavedAccelerated)} interest`
+          },
+          {
+            name: 'Option 3: HELOC (Untouched 1st)',
+            balance: `${Core.formatCurrency(current.mortgage.balance)} + ${Core.formatCurrency(heloc.helocBalance)}`,
+            balanceSub: '',
+            payment: `${Core.formatCurrency(heloc.totalPayment)}/mo`,
+            paymentSub: heloc.monthlyPaymentSavings >= 0 ? `Saves ${Core.formatCurrency(heloc.monthlyPaymentSavings)}/mo` : '',
+            interest: `${Core.formatCurrency(heloc.totalMonthlyInterest)}/mo`,
+            interestSub: heloc.monthlyInterestSavings >= 0 ? `Saves ${Core.formatCurrency(heloc.monthlyInterestSavings)}/mo` : '',
+            rate: Core.formatPercent(heloc.overallBlendedRate),
+            standard: heloc.isInterestOnly ? 'Interest-Only' : Core.formatMonths(heloc.standardPayoff.months),
+            standardSub: '',
+            accel: `${Core.formatMonths(heloc.acceleratedPayoff.months)} (HELOC)`,
+            accelSub: `Saves ${Core.formatCurrency(heloc.interestSavedAccelerated)} interest`
+          }
+        ];
+
+        data.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.appendChild(createCell(r.name, '', true));
+          tr.appendChild(createCell(r.balance, r.balanceSub, false));
+          tr.appendChild(createCell(r.payment, r.paymentSub, false));
+          tr.appendChild(createCell(r.interest, r.interestSub, false));
+          tr.appendChild(createCell(r.rate, '', true));
+          tr.appendChild(createCell(r.standard, r.standardSub, false));
+          tr.appendChild(createCell(r.accel, r.accelSub, false));
+          elements.comparisonTableBody.appendChild(tr);
+        });
+      }
+
+      // Event Listeners for Static Inputs
+      function setupInputListeners() {
+        // Mortgage inputs
+        elements.mortgageBalance.addEventListener('input', () => {
+          state.mortgage.balance = Core.parseNumber(elements.mortgageBalance.value);
+          updateCalculations();
+        });
+        elements.mortgageRate.addEventListener('input', () => {
+          state.mortgage.rate = Core.parseNumber(elements.mortgageRate.value);
+          updateCalculations();
+        });
+        elements.mortgagePayment.addEventListener('input', () => {
+          state.mortgage.payment = Core.parseNumber(elements.mortgagePayment.value);
+          updateCalculations();
+        });
+
+        // Refi inputs
+        elements.refiRate.addEventListener('input', () => {
+          state.refi.rate = Core.parseNumber(elements.refiRate.value);
+          updateCalculations();
+        });
+        elements.refiTermYears.addEventListener('change', () => {
+          state.refi.termYears = Core.parseNumber(elements.refiTermYears.value);
+          updateCalculations();
+        });
+        elements.refiClosingCosts.addEventListener('input', () => {
+          state.refi.closingCosts = Core.parseNumber(elements.refiClosingCosts.value);
+          updateCalculations();
+        });
+        elements.refiIncludeCosts.addEventListener('change', () => {
+          state.refi.includeClosingCosts = elements.refiIncludeCosts.checked;
+          updateCalculations();
+        });
+
+        // HELOC inputs
+        elements.helocRate.addEventListener('input', () => {
+          state.heloc.rate = Core.parseNumber(elements.helocRate.value);
+          updateCalculations();
+        });
+        elements.helocTermYears.addEventListener('change', () => {
+          state.heloc.termYears = Core.parseNumber(elements.helocTermYears.value);
+          updateCalculations();
+        });
+        elements.helocPaymentMode.addEventListener('change', () => {
+          state.heloc.paymentMode = elements.helocPaymentMode.value;
+          updateCalculations();
+        });
+        elements.helocFees.addEventListener('input', () => {
+          state.heloc.fees = Core.parseNumber(elements.helocFees.value);
+          updateCalculations();
+        });
+        elements.helocIncludeFees.addEventListener('change', () => {
+          state.heloc.includeFees = elements.helocIncludeFees.checked;
+          updateCalculations();
+        });
+
+        // Add Debt button
+        elements.btnAddDebt.addEventListener('click', () => {
+          const newDebt = {
+            id: nextDebtId++,
+            name: `Debt ${state.debts.length + 1}`,
+            balance: 5000,
+            rate: 19.99,
+            payment: 150,
+            includeInRefi: true,
+            includeInHeloc: true,
+            interestOverride: ''
+          };
+          state.debts.push(newDebt);
+          renderDebtInputs();
+          updateCalculations();
+        });
+
+        // Select All buttons
+        elements.btnSelectAllRefi.addEventListener('click', () => {
+          const allChecked = state.debts.every(d => d.includeInRefi);
+          state.debts.forEach(d => d.includeInRefi = !allChecked);
+          renderDebtInputs();
+          updateCalculations();
+        });
+
+        elements.btnSelectAllHeloc.addEventListener('click', () => {
+          const allChecked = state.debts.every(d => d.includeInHeloc);
+          state.debts.forEach(d => d.includeInHeloc = !allChecked);
+          renderDebtInputs();
+          updateCalculations();
+        });
+
+        // Debt Items Container Event Delegation
+        elements.debtItemsContainer.addEventListener('input', (e) => {
+          const target = e.target;
+          const id = Number(target.dataset.id);
+          const debt = state.debts.find(d => d.id === id);
+          if (!debt) return;
+
+          if (target.classList.contains('debt-field-name')) {
+            debt.name = target.value;
+          } else if (target.classList.contains('debt-field-balance')) {
+            debt.balance = Core.parseNumber(target.value);
+            updateCalculations();
+          } else if (target.classList.contains('debt-field-rate')) {
+            debt.rate = Core.parseNumber(target.value);
+            updateCalculations();
+          } else if (target.classList.contains('debt-field-payment')) {
+            debt.payment = Core.parseNumber(target.value);
+            updateCalculations();
+          }
+        });
+
+        elements.debtItemsContainer.addEventListener('change', (e) => {
+          const target = e.target;
+          const id = Number(target.dataset.id);
+          const debt = state.debts.find(d => d.id === id);
+          if (!debt) return;
+
+          if (target.classList.contains('debt-field-refi')) {
+            debt.includeInRefi = target.checked;
+            updateCalculations();
+          } else if (target.classList.contains('debt-field-heloc')) {
+            debt.includeInHeloc = target.checked;
+            updateCalculations();
+          }
+        });
+
+        elements.debtItemsContainer.addEventListener('click', (e) => {
+          const target = e.target.closest('.btn-remove-debt');
+          if (!target) return;
+          const id = Number(target.dataset.id);
+          state.debts = state.debts.filter(d => d.id !== id);
+          renderDebtInputs();
+          updateCalculations();
+        });
+
+        // Reset Defaults
+        elements.btnResetDefaults.addEventListener('click', () => {
+          if (confirm('Reset all values to the default example?')) {
+            state = JSON.parse(JSON.stringify(defaultState));
+            localStorage.removeItem('debt_calc_scenario');
+            window.location.hash = '';
+            populateStaticInputs();
+            renderDebtInputs();
+            updateCalculations();
+          }
+        });
+
+        // Print
+        elements.btnPrint.addEventListener('click', () => {
+          window.print();
+        });
+
+        // Email Summary Modal
+        elements.btnEmailSummary.addEventListener('click', openSummaryModal);
+        elements.btnCloseModal.addEventListener('click', closeSummaryModal);
+        elements.summaryModal.addEventListener('click', (e) => {
+          if (e.target === elements.summaryModal) closeSummaryModal();
+        });
+
+        elements.btnLaunchEmail.addEventListener('click', () => {
+          if (!currentResults) return;
+          const summaryText = Core.generateTextSummary(currentResults);
+          const subject = encodeURIComponent('Debt Consolidation & Blended Rate Analysis');
+          const body = encodeURIComponent(summaryText);
+          window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        });
+
+        elements.btnCopyText.addEventListener('click', () => {
+          if (!currentResults) return;
+          const summaryText = Core.generateTextSummary(currentResults);
+          navigator.clipboard.writeText(summaryText).then(() => {
+            alert('Summary copied to clipboard!');
+          }).catch(() => {
+            elements.modalSummaryText.select();
+            document.execCommand('copy');
+            alert('Summary copied to clipboard!');
+          });
+        });
+
+        // Shareable Link
+        elements.btnShareLink.addEventListener('click', copyShareLink);
+        elements.btnCopyShareableLink.addEventListener('click', copyShareLink);
+      }
+
+      function openSummaryModal() {
+        if (!currentResults) return;
+        const summary = Core.generateTextSummary(currentResults);
+        elements.modalSummaryText.value = summary;
+        elements.summaryModal.classList.add('active');
+      }
+
+      function closeSummaryModal() {
+        elements.summaryModal.classList.remove('active');
+      }
+
+      function copyShareLink() {
+        const url = getShareableUrl();
+        navigator.clipboard.writeText(url).then(() => {
+          alert('Shareable link copied to clipboard!\nAnyone with this link will open your exact inputs and calculations.');
+        }).catch(() => {
+          prompt('Copy this shareable URL:', url);
+        });
+      }
+
+      // Initialize
+      initializeState();
+      populateStaticInputs();
+      renderDebtInputs();
+      setupInputListeners();
+      updateCalculations();
+    })();
+  </script>
+</body>
+</html>
