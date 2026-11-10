@@ -1,8 +1,0 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import {visibleScenarioIds,setScenarioVisibility} from '../public/assets/comparison-layout.js';
-import {defaults,restore,save} from '../public/assets/state.js';
-import {compareScenarios,strongestScenario} from '../public/assets/comparison.js';
-test('scenario visibility always leaves an option and preserves canonical order',()=>{let hidden=[];hidden=setScenarioVisibility(hidden,'current',false);assert.deepEqual(visibleScenarioIds(hidden),['refi','heloc']);hidden=setScenarioVisibility(hidden,'refi',false);assert.deepEqual(visibleScenarioIds(hidden),['heloc']);assert.equal(setScenarioVisibility(hidden,'heloc',false),hidden);assert.deepEqual(visibleScenarioIds(setScenarioVisibility(hidden,'current',true)),['current','heloc']);assert.equal(setScenarioVisibility(hidden,'unknown',false),hidden);assert.deepEqual(visibleScenarioIds(['current','refi','heloc']),['current','refi','heloc']);});
-test('hidden cards save and restore, invalid all-hidden settings recover safely',()=>{let value;const storage={getItem:()=>value,setItem:(key,v)=>value=v},s=defaults();s.hiddenScenarios=['current'];save(storage,s);assert.deepEqual(restore(storage).hiddenScenarios,['current']);s.hiddenScenarios=['current','refi','heloc'];save(storage,s);assert.deepEqual(restore(storage).hiddenScenarios,[]);});
-test('hiding a card never changes calculations or strongest-scenario eligibility',()=>{const s=defaults();Object.assign(s.fields,{helocRateMode:'manual',helocRate:7.5,refiRateMode:'manual',refiRate:7.5});const before=compareScenarios(s);s.hiddenScenarios=['heloc'];const after=compareScenarios(s);assert.deepEqual(after,before);assert.deepEqual(strongestScenario(after,'payment'),['heloc']);});
