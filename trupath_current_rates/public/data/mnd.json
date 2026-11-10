@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "rates": {
+    "fixed30": {
+      "rate": 7.3,
+      "observationDate": "2026-11-03"
+    },
+    "fixed15": {
+      "rate": 6.91,
+      "observationDate": "2026-11-03"
+    },
+    "fha30": {
+      "rate": 6.95,
+      "observationDate": "2026-11-03"
+    },
+    "va30": {
+      "rate": 6.97,
+      "observationDate": "2026-11-03"
+    }
+  },
+  "source": "https://www.mortgagenewsdaily.com/mortgage-rates",
+  "checkedAt": "2026-11-03T22:39:26.943Z"
+}
